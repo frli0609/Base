@@ -95,7 +95,7 @@ for i in I:
         for m in M_ij[(i, j)]:
             X_ijm.append((i, j, m))
 X_ijm = gp.tuplelist(X_ijm)
-定义变量A_ijf
+# 定义变量A_ijf
 A_ijf = []
 for i in I:
     for j in O_ij[i]:
@@ -123,25 +123,26 @@ Model.addConstrs((X_ijm.sum(i, j, "*") == 1 for (i, j) in M_ij.keys()))
 # （2） 同一时刻，一道工序只能使用一个夹具。
 Model.addConstrs((A_ijf.sum(i, j, "*") == 1 for (i, j) in F_ij.keys()))
 
-for i in I:
-    for j in O_ij[i]:
-        for f in F:
-            if f not in F_ij[i, j]:
-                A_ijf[(i, j, f)] = 0
+# for i in I:
+#     for j in O_ij[i]:
+#         for f in F:
+#             if f not in F_ij[i, j]:
+#                 A_ijf[(i, j, f)] = 0
 # （3） 某道工序夹具装卸时间
 for i in I:
     for j in O_ij[i]:
         for f in F:
-            if 1 < j < len(O_ij[i]):
-                Model.addConstr(gp.quicksum(E_f[f] * (1 - A_ijf[i, j, f] * A_ijf[i, (j - 1), f]) for f in F) +
-                                gp.quicksum(E_f[f] * (1 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) == FT_ij[
-                                    (i, j)])
-            if j == 1:
-                Model.addConstr(
-                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) == FT_ij[(i, j)])
-            if j == len(O_ij[i]):
-                Model.addConstr(
-                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j - 1), f]) for f in F) == FT_ij[(i, j)])
+            # if A_ijf[i, j, f] == 1:
+                if 1 < j < len(O_ij[i]):
+                    Model.addConstr(gp.quicksum(E_f[f] * (1 - A_ijf[i, (j - 1), k]) * A_ijf[i, j, k] for k in F) +
+                                    gp.quicksum(E_f[f] * (1 - A_ijf[i, (j + 1), k]) * A_ijf[i, j, k] for k in F) ==
+                                    FT_ij[(i, j)])
+                if j == 1:
+                    Model.addConstr(
+                        gp.quicksum(E_f[k] * (2 - A_ijf[i, (j + 1), k]) * A_ijf[i, j, k] for k in F) == FT_ij[(i, j)])
+                if j == len(O_ij[i]):
+                    Model.addConstr(
+                        gp.quicksum(E_f[k] * (2 - A_ijf[i, (j - 1), k]) * A_ijf[i, j, k] for k in F) == FT_ij[(i, j)])
 
 # （4） 同一时刻，同一夹具只能夹持一个工件。
 for i in I:
