@@ -2,7 +2,7 @@ import gurobipy as gp
 from gurobipy import GRB
 import time
 
-L = 999996666
+L = 999996666111
 
 # 数据结构
 I = [1, 2]  # product
