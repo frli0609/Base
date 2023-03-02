@@ -30,6 +30,8 @@ for i in I:
             else:
                 B_ijf[(i, j, f)] = 0
 
+print(B_ijf)
+
 # 如果工序O_ij可以在机器m上加工，则W_ijm=1，否则W_ijm=0
 W_ijm = {}
 for i in I:
