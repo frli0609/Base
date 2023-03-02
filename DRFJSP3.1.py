@@ -105,10 +105,10 @@ A_ijf = gp.tuplelist(A_ijf)
 Model = gp.Model("DRFJSP_2")
 
 # 定义变量
-X_ijm = Model.addVars(X_ijm, vtype=GRB.INTEGER, name="X_ijm", lb=0, ub=1)
-Y_ijgkm = Model.addVars(Y_ijgkm, vtype=GRB.INTEGER, name="Y_ijgkm", lb=0, ub=1)
-A_ijf = Model.addVars(A_ijf, vtype=GRB.INTEGER, name="A_ijf", lb=0, ub=1)
-Z_ijgkf = Model.addVars(Z_ijgkf, vtype=GRB.INTEGER, name="Z_ijgkf", lb=0, ub=1)
+X_ijm = Model.addVars(X_ijm, vtype=GRB.BINARY, name="X_ijm")
+Y_ijgkm = Model.addVars(Y_ijgkm, vtype=GRB.BINARY, name="Y_ijgkm")
+A_ijf = Model.addVars(A_ijf, vtype=GRB.BINARY, name="A_ijf")
+Z_ijgkf = Model.addVars(Z_ijgkf, vtype=GRB.BINARY, name="Z_ijgkf")
 C_i = Model.addVars(I, vtype=GRB.CONTINUOUS, name="C_i", lb=0.0)
 s_ij = Model.addVars(M_ij.keys(), vtype=GRB.CONTINUOUS, name="start_time", lb=0.0)
 c_ij = Model.addVars(M_ij.keys(), vtype=GRB.CONTINUOUS, name="complete_time", lb=0.0)
@@ -132,21 +132,14 @@ for i in I:
         for f in F:
             if 1 < j < len(O_ij[i]):
                 Model.addConstr(gp.quicksum(E_f[f] * (1 - A_ijf[i, j, f] * A_ijf[i, (j - 1), f]) for f in F) +
-                                gp.quicksum(E_f[f] * (1 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) <= FT_ij[
-                                    (i, j)])
-                Model.addConstr(gp.quicksum(E_f[f] * (1 - A_ijf[i, j, f] * A_ijf[i, (j - 1), f]) for f in F)
-                                + gp.quicksum(E_f[f] * (1 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) >= FT_ij[
+                                gp.quicksum(E_f[f] * (1 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) == FT_ij[
                                     (i, j)])
             if j == 1:
                 Model.addConstr(
-                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) <= FT_ij[(i, j)])
-                Model.addConstr(
-                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) >= FT_ij[(i, j)])
+                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j + 1), f]) for f in F) == FT_ij[(i, j)])
             if j == len(O_ij[i]):
                 Model.addConstr(
-                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j - 1), f]) for f in F) <= FT_ij[(i, j)])
-                Model.addConstr(
-                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j - 1), f]) for f in F) >= FT_ij[(i, j)])
+                    gp.quicksum(E_f[f] * (2 - A_ijf[i, j, f] * A_ijf[i, (j - 1), f]) for f in F) == FT_ij[(i, j)])
 
 # （4） 同一时刻，同一夹具只能夹持一个工件。
 for i in I:
@@ -224,9 +217,9 @@ for i in I:
 # 目标函数
 Model.setObjective(C_max, gp.GRB.MINIMIZE)
 
-start_time = time.time()
-Model.Params.LogToConsole = True
-Model.Params.TimeLimit = 300
+# start_time = time.time()
+# Model.Params.LogToConsole = True
+# Model.Params.TimeLimit = 300
 Model.update()
 Model.optimize()
 
