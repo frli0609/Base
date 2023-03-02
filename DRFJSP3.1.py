@@ -20,7 +20,7 @@ T_ijm = {(1, 1, 1): 2, (1, 1, 2): 6, (1, 1, 3): 5, (1, 1, 4): 3, (1, 1, 5): 4,
          (2, 2, 1): 4, (2, 2, 2): 6, (2, 2, 3): 5,
          (2, 3, 2): 7, (2, 3, 3): 11, (2, 3, 4): 5, (2, 3, 5): 8}  # 每道工序在可选机器上的加工时间
 
-# 如果工序O_ij可以用夹具f夹持，则D_ijf=1，否则D_ijf=0
+# 如果工序O_ij可以用夹具f夹持，则B_ijf=1，否则B_ijf=0
 B_ijf = {}
 for i in I:
     for j in O_ij[i]:
@@ -127,7 +127,7 @@ for i in I:
     for j in O_ij[i]:
         for f in F:
             if f not in F_ij[i, j]:
-                A_ijf[(i, j, f)] = 0
+                Model.addConstr(A_ijf[(i, j, f)] == 0)
 # （3） 某道工序夹具装卸时间
 for i in I:
     for j in O_ij[i]:
