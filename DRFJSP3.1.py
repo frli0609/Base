@@ -95,7 +95,7 @@ for i in I:
         for m in M_ij[(i, j)]:
             X_ijm.append((i, j, m))
 X_ijm = gp.tuplelist(X_ijm)
-# 定义变量A_ijf
+定义变量A_ijf
 A_ijf = []
 for i in I:
     for j in O_ij[i]:
@@ -154,8 +154,8 @@ for i in I:
                         for f in Z_ijgk[(i, j, g, k)]:
                             Model.addConstr(s_ij[i, j] + FT_ij[(i, j)] + gp.quicksum(
                                 T_ijm[i, j, m] * X_ijm[i, j, m] for m in M_ij[(i, j)]) <= s_ij[(g, k)] + (
-                                                        2 - A_ijf[(i, j, f)] - A_ijf[(g, k, f)]) * L + (
-                                                        1 - Z_ijgkf[(i, j, g, k, f)]) * L)
+                                                    2 - A_ijf[(i, j, f)] - A_ijf[(g, k, f)]) * L + (
+                                                    1 - Z_ijgkf[(i, j, g, k, f)]) * L)
 
 # （5） 同一时刻，同一台机器上只允许有一个工件的某道工序在加工。
 for i in I:
@@ -168,8 +168,8 @@ for i in I:
                         for m in Y_ijgk[(i, j, g, k)]:
                             Model.addConstr(s_ij[i, j] + FT_ij[(i, j)] + gp.quicksum(
                                 T_ijm[i, j, m] * X_ijm[i, j, m] for m in M_ij[(i, j)]) <= (
-                                                        s_ij[(g, k)] + (2 - X_ijm[(i, j, m)] - X_ijm[(g, k, m)]) * L + (
-                                                            1 - Y_ijgkm[(i, j, g, k, m)]) * L))
+                                                    s_ij[(g, k)] + (2 - X_ijm[(i, j, m)] - X_ijm[(g, k, m)]) * L + (
+                                                    1 - Y_ijgkm[(i, j, g, k, m)]) * L))
                             Model.addConstr(X_ijm[(i, j, m)] + X_ijm[(g, k, m)] - 1 <= Y_ijgkm[(i, j, g, k, m)])
                             Model.addConstr(Y_ijgkm[(i, j, g, k, m)] <= X_ijm[(i, j, m)])
                             Model.addConstr(Y_ijgkm[(i, j, g, k, m)] <= X_ijm[(g, k, m)])
