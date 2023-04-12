@@ -2,29 +2,35 @@
 
 一些常用启发式算法的入门尝试，纯小白的入门记录
 
-# 第零章、首先附一些个使用手册。。
+## 第零章、首先附一些个使用手册
 
-## 1.py39文档
+### 1.py39文档
 
 https://docs.python.org/zh-cn/3.9/
 
 好像是官方给的使用手册，常用数据结构也就是列表元组字典，应对GA这种就足够了，更高级的结构一般也不太会用到。
 
-## 2.markdown语法官方文档
+### 2.markdown语法官方文档
 
 https://markdown.com.cn/basic-syntax/
 
 纯菜鸡一个，MD语法用到哪查到哪
 
+### 3. github文档
+<https://docs.github.com/zh>不知道有啥用先放着
+
+### 4. git文档
+<https://git-scm.com/docs>不知道有啥用先放着
+
 # 第一章 环境配置
-1~5节是基于PyCharm和Anaconda的环境配置，6节及以后是基于VScode的环境配置
+1~4节是基于PyCharm和Anaconda的环境配置，5节及以后是基于VScode的环境配置
 
 ## 1. pycharm安装
 
 太简单了没啥好说的，pycharm community免费版直接上了
 
 ## 2. git安装
-这个知乎回答对git安装写的相当详细<https://www.zhihu.com/search?type=content&q=git%E5%AE%89%E8%A3%85>
+这个知乎回答对git安装写的相当详细<https://zhuanlan.zhihu.com/p/607970211>
 
 只挑一点重要的过来记录一下
 
@@ -32,17 +38,57 @@ https://markdown.com.cn/basic-syntax/
 
 ②git用户名和邮箱与github保持一致
 
+③本地仓库初始化
+
+```
+# 用户名和邮箱
+git config --global user.name "abcd"
+git config --global user.email 123@abc.com
+
+# 检查配置信息 
+git config --list
+
+# 初始化仓库
+git init
+
+# 添加所有变化
+git add .
+
+# commit & push
+git commit -m "Input your commit message"
+
+git push origin main
+...
+
+```
+
 ## 3. git远程链接到github
 
 ①本地SSH生成，导入github
 
 ②github代码仓库URL链接到本地
+```
+git remote add origin git@github.com:balabalabalabala.git
+```
+其中`git@github.com:balabalabalabala.git`这一段是仓库地址
 
-③对于第一次push前远程代码仓库已经非空的操作，首先需要把所有信息pull到本地然后再往远程仓库push,参考这个回答<https://zhuanlan.zhihu.com/p/88246764>
+③对于第一次push前远程代码仓库已经非空的操作，首先需要把所有信息pull到本地然后再往远程仓库push
 
-`git pull origin master --allow-unrelated-histories`
+参考这个回答<https://zhuanlan.zhihu.com/p/88246764>
 
-④.gitignore文件配置
+首先从远程拉取
+
+`git pull origin master --allow-unrelated-histories #仅远程非空使用，远程仓库为空可以跳到下一行直接push`
+
+接下来才能push上去：
+
+`git push origin main`
+
+针对非空仓库的关联：为什么不直接git pull origin master呢？是可以的，但是2个不同项目的不同提交记录并没有关联，最后git push origin master是不会成功的。
+会出现(non-fast-forward报错)，其根本原因是repository已经存在项目且不是你本人提交（但是git只认地址），你commit的项目和远程repository不一样。
+
+# 4. 新建.gitignore文件配置
+直接在pycharm的program里new一个无类型的file，然后命名为`.gitignore`，然后根据提示自动加入git文件
 ```
 ##ignore this file##
 /target/
@@ -102,6 +148,9 @@ Thumbs.db
 
 ②gurobi库与anaconda虚拟环境配置
 直接把gurobi的grbpy文件夹复制到虚拟环境的Lib文件夹下面是最简单粗暴高效的也是稳定成功的。conda（或者pip） install日常失灵，不大好用。
+
+③在我用的时候，anaconda新建虚拟环境不能选R语言支持，只能勾选各个版本的python。否则会报错”multiple error(s)“，网上查了查据说可能是因为服务器在海外，是网络错误，
+但试了试开clash tun模式并没有解决，不太懂，不过只要不勾选R语言支持就没问题。
 
 # 5. VScode环境配置
 
