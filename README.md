@@ -87,7 +87,7 @@ git remote add origin git@github.com:balabalabalabala.git
 针对非空仓库的关联：为什么不直接git pull origin master呢？是可以的，但是2个不同项目的不同提交记录并没有关联，最后git push origin master是不会成功的。
 会出现(non-fast-forward报错)，其根本原因是repository已经存在项目且不是你本人提交（但是git只认地址），你commit的项目和远程repository不一样。
 
-# 4. 新建.gitignore文件配置
+## 4. 新建.gitignore文件配置
 直接在pycharm的program里new一个无类型的file，然后命名为`.gitignore`，然后根据提示自动加入git文件
 ```
 ##ignore this file##
@@ -141,7 +141,7 @@ Thumbs.db
 /mvnw
 ```
 
-## 4. anaconda安装和pycharm编译环境配置
+## 5. anaconda安装和pycharm编译环境配置
 
 ①首先注意一点，默认的envs有可能在C盘不可视文件夹"program data"里面，也有可能在目录“uses/conda.”底下，
 找不到了就去这两个地方看。 旧版一般是在programdata下面的，需要“显示隐藏的文件夹”，新版anaconda就默认把虚拟环境文件放在users/conda.下了
@@ -152,7 +152,7 @@ Thumbs.db
 ③在我用的时候，anaconda新建虚拟环境不能选R语言支持，只能勾选各个版本的python。否则会报错”multiple error(s)“，网上查了查据说可能是因为服务器在海外，是网络错误，
 但试了试开clash tun模式并没有解决，不太懂，不过只要不勾选R语言支持就没问题。
 
-# 5. VScode环境配置
+## 6. VScode环境配置
 
 # 第二章、GA-FJSP
 
