@@ -1,8 +1,9 @@
-import random
 import copy
+import random
 import time
-import matplotlib.pyplot as plt
+
 import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
 
 
 class FJSP:
@@ -52,7 +53,7 @@ class FJSP:
             self.job_what_machine[job][process] = machine
             machine_index = self.job_machien[job][process].index(machine)
             self.job_end_time[job][process] = self.job_start_time[job][process] + \
-                self.job_time[job][process][machine_index]
+                                              self.job_time[job][process][machine_index]
             self.machine_start_time[machine] = self.job_start_time[job][process]
             self.machine_end_time[machine] = self.job_end_time[job][process]
             self.job_process_record[job] += 1
@@ -235,4 +236,3 @@ print('遗传算法求解结果为:', '\n',
 f.reset()
 f.decode(test[0][1])
 f.draw_gantte()
-
