@@ -145,12 +145,18 @@ Thumbs.db
 
 ①首先注意一点，默认的envs有可能在C盘不可视文件夹"program data"里面，也有可能在目录“uses/conda.”底下，
 找不到了就去这两个地方看。 旧版一般是在programdata下面的，需要“显示隐藏的文件夹”，新版anaconda就默认把虚拟环境文件放在users/conda.下了
+关于这一点还有一个很重要的是【文件修改权限】，如果在program data下的话，有可能users不具有修改权限（需要管理员权限），
+所以可能conda install的时候会报错，用conda可视化界面的时候也会报错“multiple errors”，解决方法是右键文件夹，属性，安全，把users的权限勾上。
+但在users下面就没有这个问题，只不过在users下会占用C盘空间，而且东一块西一块不方便管理，各有各的好，自行选择。
+这一点可以参考链接，里面还给了如何修改envs文件夹位置的方法。<https://blog.csdn.net/hshudoudou/article/details/126388686>
 
 ②gurobi库与anaconda虚拟环境配置
 直接把gurobi的grbpy文件夹复制到虚拟环境的Lib文件夹下面是最简单粗暴高效的也是稳定成功的。conda（或者pip） install日常失灵，不大好用。
 
 ③在我用的时候，anaconda新建虚拟环境不能选R语言支持，只能勾选各个版本的python。否则会报错”multiple error(s)“，网上查了查据说可能是因为服务器在海外，是网络错误，
 但试了试开clash tun模式并没有解决，不太懂，不过只要不勾选R语言支持就没问题。
+
+④
 
 ## 6. VScode环境配置
 
