@@ -78,7 +78,7 @@ git remote add origin git@github.com:balabalabalabala.git
 
 首先从远程拉取
 
-`git pull origin master --allow-unrelated-histories #仅远程非空使用，远程仓库为空可以跳到下一行直接push`
+`git pull origin main --allow-unrelated-histories #仅远程非空使用，远程仓库为空可以跳到下一行直接push`
 
 接下来才能push上去：
 
