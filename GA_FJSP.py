@@ -11,7 +11,7 @@ class FJSP:
         self.job_machine_time = job_machine_time
         self.job_number = len(self.job_machine_time)
         self.machine_number = len(self.job_machine_time[0][0])
-        self.job_machien = [[[k for k in range(len(self.job_machine_time[i][j]))
+        self.job_machine = [[[k for k in range(len(self.job_machine_time[i][j]))
                               if self.job_machine_time[i][j][k] != -1] for j in range(len(self.job_machine_time[i]))]
                             for i in range(len(self.job_machine_time))]
         self.job_time = [[[self.job_machine_time[i][j][k] for k in range(len(self.job_machine_time[i][j]))
@@ -34,7 +34,7 @@ class FJSP:
         machines = []
         for i in range(len(codes)):
             # codes[i] 是工件 record[codes[i]]是工序
-            machines.append(random.choice(self.job_machien[codes[i]][record[codes[i]]]))
+            machines.append(random.choice(self.job_machine[codes[i]][record[codes[i]]]))
             record[codes[i]] += 1
         return [codes, machines]
 
@@ -51,7 +51,7 @@ class FJSP:
                 self.job_start_time[job][process] = max(self.machine_end_time[machine],
                                                         self.job_end_time[job][process - 1])
             self.job_what_machine[job][process] = machine
-            machine_index = self.job_machien[job][process].index(machine)
+            machine_index = self.job_machine[job][process].index(machine)
             self.job_end_time[job][process] = self.job_start_time[job][process] + \
                                               self.job_time[job][process][machine_index]
             self.machine_start_time[machine] = self.job_start_time[job][process]
@@ -93,7 +93,7 @@ class FJSP:
         for i in range(rand):
             if codes[0][i] == codes[0][rand]:
                 pro += 1
-        codes[1][rand] = random.choice(self.job_machien[codes[0][rand]][pro])
+        codes[1][rand] = random.choice(self.job_machine[codes[0][rand]][pro])
         return codes
 
     @staticmethod
