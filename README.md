@@ -154,10 +154,10 @@ Thumbs.db
 但试了试开clash tun模式并没有解决，不太懂，不过只要不勾选R语言支持就没问题。
 
 ## 6.gurobi环境配置
-WIN:gurobi库与anaconda虚拟环境配置
-直接把gurobi的grbpy文件夹复制到虚拟环境的Lib文件夹下面是最简单粗暴高效的也是稳定成功的。conda（或者pip） install日常失灵，不大好用。
+①WIN:gurobi库与anaconda虚拟环境配置
+直接把gurobi的grbpy文件夹复制到虚拟环境的Lib文件夹下面是最简单粗暴高效的也是稳定成功的。conda（或者pip） install日常失灵，不大好用。详细参考链接<https://zhuanlan.zhihu.com/p/29165673>
 
-MAC:找到Gurobi安装位置，在/Library/gurobixxx/mac64下，其中xxx是你安装的版本号，该目录下会有setup.py文件然后激活你要使用conda环境，执行该文件安装即可，如下
+②MAC:找到Gurobi安装位置，在/Library/gurobixxx/mac64下，其中xxx是你安装的版本号，该目录下会有setup.py文件然后激活你要使用conda环境，执行该文件安装即可，如下
 ```
 conda activate 你要使用的conda环境名字
 cd /Library/gurobixxx/mac64
