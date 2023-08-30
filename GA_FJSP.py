@@ -4,7 +4,7 @@ import time
 
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
-
+#6666666666
 
 class FJSP:
     def __init__(self, job_machine_time):
