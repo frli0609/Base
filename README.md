@@ -150,13 +150,21 @@ Thumbs.db
 但在users下面就没有这个问题，只不过在users下会占用C盘空间，而且东一块西一块不方便管理，各有各的好，自行选择。
 这一点可以参考链接，里面给了如何修改envs文件夹位置和修改文件夹权限的方法。<https://blog.csdn.net/hshudoudou/article/details/126388686>
 
-②gurobi库与anaconda虚拟环境配置
-直接把gurobi的grbpy文件夹复制到虚拟环境的Lib文件夹下面是最简单粗暴高效的也是稳定成功的。conda（或者pip） install日常失灵，不大好用。
-
 ③在我用的时候，anaconda新建虚拟环境不能选R语言支持，只能勾选各个版本的python。否则会报错”multiple error(s)“，网上查了查据说可能是因为服务器在海外，是网络错误，
 但试了试开clash tun模式并没有解决，不太懂，不过只要不勾选R语言支持就没问题。
 
-## 6. VScode环境配置
+## 6.gurobi环境配置
+WIN:gurobi库与anaconda虚拟环境配置
+直接把gurobi的grbpy文件夹复制到虚拟环境的Lib文件夹下面是最简单粗暴高效的也是稳定成功的。conda（或者pip） install日常失灵，不大好用。
+
+MAC:找到Gurobi安装位置，在/Library/gurobixxx/mac64下，其中xxx是你安装的版本号，该目录下会有setup.py文件然后激活你要使用conda环境，执行该文件安装即可，如下
+```
+conda activate 你要使用的conda环境名字
+cd /Library/gurobixxx/mac64
+python setup.py install
+```
+
+## 7. VScode环境配置
 
 # 第二章、GA-FJSP
 
