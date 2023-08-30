@@ -36,6 +36,8 @@ class FJSP:
             # codes[i] 是工件 record[codes[i]]是工序
             machines.append(random.choice(self.job_machine[codes[i]][record[codes[i]]]))
             record[codes[i]] += 1
+        # print('codes', codes, '\n',
+        #       'machines', machines, '\n')  # print出来辅助理解用的
         return [codes, machines]
 
     def decode(self, codes):
@@ -44,14 +46,14 @@ class FJSP:
             # codes[0][i] 工件    codes[1][i] 机器    self.job_process_record[codes[i]] 工序
             job = codes[0][i]
             machine = codes[1][i]
-            process = self.job_process_record[codes[0][i]]
+            process = self.job_process_record[codes[0][i]] #codes[0][i]相当于job
             if process == 0:
                 self.job_start_time[job][process] = self.machine_end_time[machine]
             else:
                 self.job_start_time[job][process] = max(self.machine_end_time[machine],
                                                         self.job_end_time[job][process - 1])
             self.job_what_machine[job][process] = machine
-            machine_index = self.job_machine[job][process].index(machine)
+            machine_index = self.job_machine[job][process].index(machine) #找到当前machine在job_machine中的位置，用于检索job_time
             self.job_end_time[job][process] = self.job_start_time[job][process] + \
                                               self.job_time[job][process][machine_index]
             self.machine_start_time[machine] = self.job_start_time[job][process]
@@ -235,4 +237,17 @@ print('遗传算法求解结果为:', '\n',
       '耗时:', time.time() - time_1)
 f.reset()
 f.decode(test[0][1])
+print('job machine time', f.job_machine_time, '\n',
+      'job number', f.job_number, '\n',
+      'machine number', f.machine_number, '\n',
+      'job machine', f.job_machine, '\n',
+      'job time', f.job_time, '\n',
+      'job start time', f.job_start_time, '\n',
+      'job end time', f.job_end_time, '\n',
+      'machine start time', f.machine_start_time, '\n',
+      'machine end time', f.machine_end_time, '\n',
+      'job proccess record', f.job_process_record, '\n',
+      'job what machine', f.job_what_machine, '\n'
+      )
 f.draw_gantte()
+

@@ -34,7 +34,7 @@ https://markdown.com.cn/basic-syntax/
 
 只挑一点重要的过来记录一下
 
-①记得把主分支的默认名称从master改成main，其他按教程选择就好了，或者直接按默认选项以及安装程序中的”recommended“选项，实验室选项都不选
+①记得把主分支的默认名称从master改成main，其他按教程选择就好了，或者直接按默认选项以及安装程序中的”recommended“选项，实验室选项都不选。这篇文章写了更改默认分支的方法<https://zhuanlan.zhihu.com/p/455988463>
 
 ②git用户名和邮箱与github保持一致
 
