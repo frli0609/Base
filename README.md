@@ -166,8 +166,6 @@ python setup.py install
 
 ## 7. VScode环境配置
 
-# 第二章、GA-FJSP
+# 第二章、系统开发-前端
 
-工件-机器对应如图。对于不可选的机器，设置加工时间为-1
-
-<img width="563" alt="image" src="https://user-images.githubusercontent.com/72543040/230000604-4b49d3bf-e4ac-4c4b-b91f-583888995d5b.png">
+# 第三章、系统开发-后端
